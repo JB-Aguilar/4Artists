@@ -15,10 +15,19 @@ const connectionAndSync = async () => {
 }
 
 const start = async () => {
-    
+    try {
+        app.get('/', (req, res) => res.send('Welcome to 4Artists'))
+        app.use(cors())
+        app.use(morgan('dev'))
+        app.use(express.json())
+        app.use('api', router)
+        app.listen(process.env.EXPRESS_PORT || 2222)
+        connectionAndSync()
+        console.info(`4Artists API running on port ${process.env.EXPRESS_PORT}`)
+    } catch (err) {
+        throw new Error(`Cannot start server on port ${process.env.EXPRESS_PORT} ${err}`)
+    }
 }
 
-app.listen(3000, () => {
-    console.log('Server started on port 3000')
-})
+start()
 
