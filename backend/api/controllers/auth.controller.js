@@ -9,7 +9,8 @@ const signup = async(req, res) =>{
             where: {email: email},
             attributes: ['email']
         });
-
+        console.log(req.body)
+        
         if (user){
             res.status(200).json('exist')
         }else{
@@ -38,9 +39,9 @@ const login = async (req, res) => {
             // password is not the same, return error
             if (err || !result) { return res.status(200).send('incorrect')}
             // Ok! Create a Jason Web Token
-            const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expires: '7d'})
-            res.status(200)
-        }).json({token})
+            const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '7d'})
+            res.status(200).json({ token });
+        })
     }catch (err) {
         console.log(err)
         res.status(500).send('Error: Failed to login!')

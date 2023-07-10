@@ -1,34 +1,34 @@
 const { sequelize } = require('../../db')
-const { Datatypes } = require('sequelize')
+const { DataTypes } = require('sequelize')
 
 const User = sequelize.define('user', {
     username: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allownull: false,
         unique: true
     }, 
     email: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allownull: false,
         unique: true,
     },
     bdate: {
-        type: Datatypes.DATEONLY,
+        type: DataTypes.DATEONLY,
         allownull: false,
         
     },
     password: {
-        type: Datatypes.STRING,
-        allownull: false
+        type: DataTypes.STRING,
+        allownull: false,
     },
     bio: {
-        type: Datatypes.STRING
+        type: DataTypes.STRING
     },
     location: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
     },
     website: {
-        type: Datatypes.STRING
+        type: DataTypes.STRING
     }
 },
 {
