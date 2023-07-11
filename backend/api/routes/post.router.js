@@ -6,8 +6,8 @@ postRouter.get('/:id', getOnePost)
 postRouter.get('/', getPosts)
 
 
-postRouter.post('/', createPost, checkAuth)
+postRouter.post('/', checkAuth, createPost )
 
-postRouter.delete('/:id', deletePost, checkAuth)
+postRouter.delete('/:id', checkAuth, deletePost)
 
 module.exports = { postRouter }

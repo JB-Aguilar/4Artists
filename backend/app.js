@@ -4,14 +4,14 @@ const cors = require('cors')
 const morgan = require ('morgan')
 const {sequelize, connectDB, syncModels, closeConnection} = require('./db')
 const { router } = require('./api/routes')
-//const addRelationsToModels = require('./db/relationship')
+const addRelationsToModels = require('./db/relationships')
 
 const app = express()
 
 const connectionAndSync = async () => {
     await connectDB()
-    //addRelationsToModels()
-    //await syncModels('force')
+    addRelationsToModels()
+    //await syncModels('alter')
 }
 
 const start = async () => {

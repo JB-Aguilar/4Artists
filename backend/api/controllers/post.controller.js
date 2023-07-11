@@ -1,4 +1,5 @@
 const { Posts } = require ('../models/post.model')
+const { User } = require ('../models/user.model.js')
 
 const getPosts = async(req, res) => {
     try {
@@ -19,20 +20,13 @@ const getOnePost = async(req, res) => {
 }
 
 const createPost = async(req, res) => {
-    try {
-        const text = req.body.text
-        console.log()
-        
-        if (!text){
-            return res.status(400).json({error: 'Text is required'})
-        }
+    try{
+        if(!req.body.userId) {req.body.userId = res.locals.user.id}
 
-        const newPost = new Posts({ text })
-        const savedPost = await newPost.save()
-
-        res.status(201).json(savedPost)
+        const post = await Posts.create(req.body)
+        return res.status(200).json({ message: 'Success', post: post})
     }catch(error){
-        res.status(500).json({error: 'An error occurred while creating post'})
+        res.status(500).send(error.message)
     }
 }
 
