@@ -3,7 +3,9 @@ const { User } = require ('../models/user.model.js')
 
 const getPosts = async(req, res) => {
     try {
-        const post = await Posts.findAll()
+        const post = await Posts.findAll({
+            include: User
+        })
         res.status(200).json( post )
     }catch(error){
         res.status(500).send('Error: posts not found')
@@ -12,7 +14,7 @@ const getPosts = async(req, res) => {
 
 const getOnePost = async(req, res) => {
     try {
-        const post = await Posts.findByPk(req.params.id)
+        const post = await Posts.findByPk(req.params.id, { include: User})
         res.status(200).json( post )
     }catch(error){
         res.status(500).send('Error: Post not found')
