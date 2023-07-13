@@ -12,9 +12,12 @@ const getPosts = async(req, res) => {
     }
 }
 
+
 const getOnePost = async(req, res) => {
     try {
-        const post = await Posts.findByPk(req.params.id, { include: User})
+        const post = await Posts.findByPk(req.params.id,{
+            include: User
+        })
         res.status(200).json( post )
     }catch(error){
         res.status(500).send('Error: Post not found')
