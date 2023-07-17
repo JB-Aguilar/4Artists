@@ -2,11 +2,11 @@ const userRouter = require('express').Router()
 const {
   getUsers,
   getOneUser,
-  createLike,
+  toggleLike,
 } = require("../controllers/user.controller");
 
 userRouter.get('/:id', getOneUser)
 userRouter.get('/', getUsers)
-userRouter.post("/:userId/likes/:postId", createLike);
+userRouter.post("/:userId/likes/:postId", toggleLike);
 
 module.exports = { userRouter }

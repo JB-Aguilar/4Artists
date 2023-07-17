@@ -21,7 +21,7 @@ const getOneUser = async (req, res) => {
   }
 };
 
-const createLike = async (req, res) => {
+const toggleLike = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.userId);
     const post = await Posts.findByPk(req.params.postId);
@@ -34,13 +34,13 @@ const createLike = async (req, res) => {
     });
     if (existingLike) {
       await existingLike.destroy();
-      return res.status(200).json({ message: "Like deleted successfully" });
+      return res.status(200).json({ message: "Like deleted successfully", liked: false });
     } else {
-      const like = await Like.create({
+      await Like.create({
         userId: user.id,
         postId: post.id,
       });
-      return res.status(201).json({ message: "Like created" });
+      return res.status(201).json({ message: "Like created", liked: true });
     }
   } catch (error) {
     console.error("Error creating like", error);
@@ -48,19 +48,4 @@ const createLike = async (req, res) => {
   }
 };
 
-const SaveLikes = async (userId, postId) => {
-  const likes = await GetLikes(userId);
-  if (!likes) {
-    likes = [];
-  }
-
-  if (likes.includes(postId)) {
-    likes.splice(likes.indexOf(postId), 1);
-  } else {
-    likes.push(postId);
-  }
-
-  await SaveLikesInDB(likes);
-};
-
-module.exports = { getOneUser, getUsers, createLike, SaveLikes };
+module.exports = { getOneUser, getUsers, toggleLike };

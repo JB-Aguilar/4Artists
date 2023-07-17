@@ -5,20 +5,7 @@ const { Like } = require("../models/like.model.js");
 const getPosts = async(req, res) => {
     try {
         const post = await Posts.findAll({
-          include: [
-            {
-              model: User
-            },
-            {
-              model: Like,
-              include: [
-                {
-                  model: User,
-                  attributes: ["id", "username"],
-                },
-              ],
-            },
-          ],
+          include: User
         });
         res.status(200).json( post )
     }catch(error){
