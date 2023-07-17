@@ -1,11 +1,25 @@
 const { Posts } = require ('../models/post.model')
-const { User } = require ('../models/user.model.js')
+const { User } = require("../models/user.model.js");
+const { Like } = require("../models/like.model.js");
 
 const getPosts = async(req, res) => {
     try {
         const post = await Posts.findAll({
-            include: User
-        })
+          include: [
+            {
+              model: User
+            },
+            {
+              model: Like,
+              include: [
+                {
+                  model: User,
+                  attributes: ["id", "username"],
+                },
+              ],
+            },
+          ],
+        });
         res.status(200).json( post )
     }catch(error){
         res.status(500).send('Error: posts not found')

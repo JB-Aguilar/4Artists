@@ -1,17 +1,16 @@
-const { sequelize } = require('../../db')
-const { Datatypes } = require('sequelize')
+const { sequelize } = require("../../db");
+const { DataTypes } = require("sequelize");
+const { User } = require("./user.model");
+const { Posts } = require("./post.model");
 
-const Likes = sequelize.define(
-  "photos",
-  {
-    user_id: {
-      type: Datatypes.INT,
-    },
-    post_id: {
-      type: Datatypes.INT,
-    },
+const Like = sequelize.define("like", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
   },
-  { timestamps: false }
-);
+});
 
-module.exports = { Likes }
+
+
+module.exports = { Like }

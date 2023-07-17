@@ -16,6 +16,9 @@ const Posts = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    img: {
+      type: DataTypes.STRING,
+    }
   },
   { timestamps: true }
 );

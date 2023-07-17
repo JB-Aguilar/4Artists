@@ -9,7 +9,6 @@ const signup = async(req, res) =>{
             where: {email: email},
             attributes: ['email']
         });
-        console.log(req.body)
         
         if (user){
             res.status(200).json('exist')
