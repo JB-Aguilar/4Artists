@@ -80,9 +80,8 @@ To set up and run the 4Artists backend locally, follow these steps:
 1. Clone the repository from [GitHub](https://github.com/JB-Aguilar/4Artists).
 2. Install the required dependencies using `npm install`.
 3. Create a MySQL database and configure the connection in `.env` file.
-4. Run the database migrations using `npm run knex migrate:latest`.
-5. Start the backend server with `npm start`.
-6. The backend will run on `http://localhost:3000`.
+4. Start the backend server with `npm start`.
+5. The backend will run on `http://localhost:3000`.
 
 ## Contributing
 
